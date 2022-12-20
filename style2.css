@@ -3,7 +3,7 @@ body {
     position: absolute;
     height: 99%;
     width: 99%;
-    overflow: hidden;
+    overflow-x:hidden;;
     }
 
     li{

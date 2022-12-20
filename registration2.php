@@ -1,4 +1,5 @@
 <?php include ('process.php') ?>
+
 <html>
 <head>
   <title>Register</title>
@@ -11,21 +12,7 @@
       display:inherit;
     }
 </style>
-<? 
-if (isset($_POST['register'])) {
-  $username = $_POST['username'];
-   $pin = $_POST['pin'];
-  $password = $_POST['password'];
-  $confirmPassword = $_POST['confirmPassword'];
-   $email = $_POST['email'];
-// username and emial validation
-  $sql_u = "SELECT * FROM register WHERE username='$username'";
-  $sql_e = "SELECT * FROM register WHERE email='$email'";
-  $res_u = mysqli_query($db, $sql_u);
-  $res_e = mysqli_query($db, $sql_e);
 
-
-?>
 <body>
 <div class="" style="
 
@@ -61,7 +48,7 @@ if (isset($_POST['register'])) {
     color: #333;
     font-size: 14px;
     margin-top: 10px;
-    text-align: center;" type="text" name="username" placeholder="Username" value="<?php echo $username; ?>" required>
+    text-align: center;" type="text" name="username" placeholder="Username" value="" id="username" required>
 	  <?php if (isset($name_error)): ?>
      
 	  <?php endif ?>
@@ -74,50 +61,66 @@ if (isset($_POST['register'])) {
     color: #333;
     font-size: 14px;
     margin-top: 10px;
-    text-align: center;" type="email" name="email" placeholder="Email (optional)" value="<?php ?>" >
+    text-align: center;" type="email" name="email" placeholder="Email" id="email" value="" >
       <?php if (isset($email_error)): ?>
       	<span class="error"><?php echo $email_error; ?></span>
       <?php endif ?>
   	</div>
    
-      <div <?php 
-      if (isset($password_error)): ?> class="form_error" <?php endif ?> >
-      <input style="width: 200px;
+
+    
+    <div> 
+    <div <?php if (isset($password_error)): ?> class="form_error" <?php endif ?> >
+      <input  style="width: 200px;
     border-radius: 2px;
     border: 1px solid #CCC;
     padding: 10px;
     color: #333;
     font-size: 14px;
     margin-top: 10px;
-    text-align: center;" type="password"  placeholder="Password" name="password" value="<?php echo $password; ?>" required>
+    text-align: center;" type="password" name="password" placeholder="Password" id="password" value="" >
       <?php if (isset($password_error)): ?>
       	<span class="error"><?php echo $password_error; ?></span>
       <?php endif ?>
   	</div>
+
+
+    <div> 
+    <div <?php if (isset($password_error)): ?> class="form_error" <?php endif ?> >
+      <input  style="width: 200px;
+    border-radius: 2px;
+    border: 1px solid #CCC;
+    padding: 10px;
+    color: #333;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;" type="password" name="confirmPassword" placeholder="Confirm Password" id="confirmPassword" value="" >
+      <?php if (isset($password_error)): ?> 
+      	<span class="error"><?php echo $password_error; ?></span>
+      <?php endif ?>
+  	</div>
+
+    <div <?php if (isset($pin_error)): ?> class="form_error" <?php endif ?> >
+      <input  style="width: 200px;
+    border-radius: 2px;
+    border: 1px solid #CCC;
+    padding: 10px;
+    color: #333;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;" type="text" name="pin" placeholder="pin" id="pin" value="" >
+      <?php if (isset($pin_error)): ?> 
+      	<span class="error"><?php echo $pin_error; ?></span>
+      <?php endif ?>
+  	</div>
+
+
+
     <!-- <div>
   		<input type="password"  placeholder="Password" name="password">
   	</div> -->
-    <div>
-  		<input style="width: 200px;
-    border-radius: 2px;
-    border: 1px solid #CCC;
-    padding: 10px;
-    color: #333;
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;" type="password"  placeholder="Confirm Password" name="confirmPassword" required>
-  	</div>
-     <div>
-    <input style="width: 200px;
-    border-radius: 2px;
-    border: 1px solid #CCC;
-    padding: 10px;
-    color: #333;
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;" type="text"  placeholder="Pin" name="pin" required>
-  	</div>
-
+    
+    
     <script type="text/javascript">
     $('form').on('submit', function(e){
         e.preventDefault();
@@ -125,30 +128,58 @@ if (isset($_POST['register'])) {
         $('input[name="option_text"]').val(text);
         $('form').submit();
     });
-</script>
-
+    </script>
 <div>
-<div class="custom-select" style="">
+<div class="custom-select" style="width:200px;">
   <select id="account_role" name="account_role" style="
     position:absolute;
-    width:11%;
-    margin-left:-102px;
+    //width: 10%;
+    //margin-left:-102px;
     border: 1px solid lightgrey;
     padding-left: 15px;
     outline: none;
     border-radius: 5px;
     font-size: 15px;
     transition: all 0.3s;
-    margin-top:20px;
+    margin-top:70px;
      ">
     <option value="Buyer">Buyer</option>
     <option value="Vendor">Vendor</option>
     </select>
     <input type='hidden' name="option_text" value=''>
+   
+    <div>
+
+<button 
+  type="submit" 
+  name="register" 
+  id="reg_btn" 
+  style="
+       padding: 10px 25px 8px;
+    position: absolute;
+    background-color: #0067ab;
+    text-shadow: rgb(0 0 0 / 24%) 0 1px 0;
+    font-size: 16px;
+    box-shadow: rgb(255 255 255 / 24%) 0 2px 0 0 inset, #fff 0 1px 0 0;
+    border: 1px solid #0164a5;
+    color: #fff;
+    margin-top: 199px;
+    cursor: pointer;
+    /* margin-top: 40%; */
+    margin-top: 165px;
+    margin-left: 30px;
+    float: left;
+    display: flex;
+    border-radius: 2px;
+   ">
+    Register
+</button>
   </div>
-    
-  	<div>
-        <button type="submit" name="register" id="reg_btn" style="    padding: 10px 25px 8px;
+<div>
+  <a href="login.php"><button type="button" name="login" id="login_btn" style="
+    padding: 10px 25px 8px;
+    margin-left: 50px;
+    position: absolute;
     color: #fff;
     background-color: #0067ab;
     text-shadow: rgb(0 0 0 / 24%) 0 1px 0;
@@ -156,23 +187,24 @@ if (isset($_POST['register'])) {
     box-shadow: rgb(255 255 255 / 24%) 0 2px 0 0 inset, #fff 0 1px 0 0;
     border: 1px solid #0164a5;
     border-radius: 2px;
-    margin-top: 170px;
-    cursor: pointer;">Register</button>
-        <a href="login.php"><button type="button" name="register" id="reg_btn" style="    padding: 10px 25px 8px;
-    color: #fff;
-    background-color: #0067ab;
-    text-shadow: rgb(0 0 0 / 24%) 0 1px 0;
-    font-size: 16px;
-    box-shadow: rgb(255 255 255 / 24%) 0 2px 0 0 inset, #fff 0 1px 0 0;
-    border: 1px solid #0164a5;
-    border-radius: 2px;
-    margin-top: 170px;
-    cursor: pointer;">Login</button></a>
+    margin-top: 165px;
+    //margin-left: 140;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    ;">Login</button></a>
+
+  </div>
+
+  </body>
+</html>
+
+
     
-        </div>
-  	</div>
-      </div>
-      <? } ?>
+      
+
   </form>
+   
+
       </body>
 </html>
