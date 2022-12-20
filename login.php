@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
-<link rel="stylesheet" href="style2.css" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="password-strength-indicator.css">
 </head>
 <body>
 <?php
@@ -29,27 +30,21 @@ if (isset($_POST['username'])){
         if($rows==1){
 	    $_SESSION['username'] = $username;
             // Redirect user to index.php
-	    header("Location: index2.php");
+	    header("Location: landing_page.php");
          }else{
-	echo "<div class='form'>
-<h3>Username/password is incorrect.</h3>
-<br/>Click here to <a href='login.php'>Login</a></div>";
+	echo "
+    <div class='container'
+    <div class='form'>
+<h3>Username or password is incorrect.</h3>
+<br/>Click here to <a href='login.php'>Login</a></div></div>";
 	}
     }else{
 ?>
-<div class="" style="
+ <div class="container" style="position:absolute; margin-left:-25px; margin-top:-800px">
+        <h1>REUP MARKET</h1>
 
-"
->
-<div class="login-head-container" style="
-    
-
-">
-
-<div class="header-title" style="
-    text-align: center;
-    "
-><h1>MARKET</h1></div></div>
+    </div>
+ <div class="container" style="position:absolute; margin-left:-25px; margin-top:-200px";>
 <div class="form" style= " 
     width: 300px;
     margin: 0 auto;
@@ -65,8 +60,9 @@ if (isset($_POST['username'])){
 
 <input name="submit" type="submit" value="Login" />
 </form>
-<p>Not registered yet? <a href='registration2.php'>Register Here</a></p>
+<p>Not registered yet? <a href='register.php'>Register Here</a></p>
 </div>
+    </div>
 <?php } ?>
 </body>
 </html>

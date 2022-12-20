@@ -16,14 +16,9 @@
 }
 
 body{
-    background-color: #565656;
-    font-family:Arial, Sans-Serif;
-    border: solid 1px black;
-    position: absolute;
-    height: 99%;
-    width: 99%;
-    overflow: hidden;
-    padding-top: 20px;
+   
+    overflow-x:hidden;
+    
 }
 
 .login-form-container{
@@ -113,8 +108,8 @@ background-color: #024978;
 }
 
 #register_form {
-    width: 37%;
-    margin: 100px auto;
+    /*width: 37%;*/
+    /*margin: 100px auto;*/
     padding-bottom: 30px;
     border: 1px solid #918274;
     border-radius: 5px;
@@ -139,8 +134,8 @@ background-color: #024978;
     border: 1px solid #D83D5A;
   }
   #reg_btn {
-    height: 35px;
-    width: 80%;
+    height: 45px;
+    /* width: 80%; */
     margin: 5px 10%;
     color: white;
     background: #3B5998;

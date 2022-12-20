@@ -7,20 +7,19 @@
 
   if (isset($_POST['register'])) {
   	$username = $_POST['username'];
-  	$pin = $_POST['pin'];
+  	$email = $_POST['email'];
   	$password = $_POST['password'];
   	$confirmPassword = $_POST['confirmPassword'];
-	$account_role = $_POST['account_role'];
-	//$email = $_POST['email'];
+    
 	// username and emial validation
-	$sql_u = "SELECT * FROM register WHERE username='$username'";
-  	//$sql_e = "SELECT * FROM register WHERE email='$email'";
+	$sql_u = "SELECT * FROM login WHERE username='$username'";
+  	$sql_e = "SELECT * FROM login WHERE password='$password'";
   	$res_u = mysqli_query($db, $sql_u);
-  	//$res_e = mysqli_query($db, $sql_e);
-     
+  	$res_e = mysqli_query($db, $sql_e);
+
 
 	// password must be greater than 8 characters
-	$password_length_invalid = strlen($password) < 8;
+	$password_length_invalid = strlen($password) > 6;
 
 	// password and confirm password do not match validation
 	$passwords_do_not_match = $password !== $confirmPassword;
@@ -35,37 +34,37 @@
 	$timestamp = time();
 	$date_time = date("Y-m-d H:i:s");
 	// Given password
-     $password = $_POST['password'];;
+     $password = '';
+	 $confirmPasswprd = '';
 
      // Validate password strength
       $uppercase = preg_match('@[A-Z]@', $password);
       $lowercase = preg_match('@[a-z]@', $password);
       $number    = preg_match('@[0-9]@', $password);
       $specialChars = preg_match('@[^\w]@', $password);
-/*
-if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password)  >6) {
-    echo 'Password must be a minimum of 8 characters and use one special character such as *';
+
+if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 7) {
+    echo '<script>alert("Password must be a minimum of 8 characters and use one special character such as !")</script>';
 }else{
     echo 'Strong password.';
-
-}*/
+}
+	
   	if (mysqli_num_rows($res_u) > 0) {
   	  $name_error = "Sorry... username already taken"; 	
-	} elseif ($passwords_do_not_match) {
+  	}else if(mysqli_num_rows($res_e) > 0){
+  	  $email_error = "Sorry... email already taken";
+	} else if ($passwords_do_not_match) {
 		$password_error = "The passwords must match";
-	} elseif  ($password_length_invalid) {
-		$password_error = "Password must be greater than 8 characters";
+	} else if ($password_length_invalid) {
+		
+	  $password_error = "Password must be greater than 8 characters";
   	}else{
 		
-	
-		
-		$query = "INSERT INTO register (username,email,password,confirmPassword) 
-      	    	  VALUES (`$username`,`$email`, `$password`, `$confirmPassword`";
+		$query = "INSERT INTO register (username, email, password, confirmPassword, pin, dateJoined,account_role) 
+      	    	  VALUES ('$username', $email ','$password','$confirmPassword','$pin','$account_role''$date_time')";
            $results = mysqli_query($db, $query);
-		   echo "Successful Registration!";
-		   
+		   header("Location:login.php");
            exit();
   	}
   }
-  
 ?>

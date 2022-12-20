@@ -34,7 +34,8 @@
 	$timestamp = time();
 	$date_time = date("Y-m-d H:i:s");
 	// Given password
-     $password = 'user-input-pass';
+     $password = '';
+	 $confirmPasswprd = '';
 
      // Validate password strength
       $uppercase = preg_match('@[A-Z]@', $password);
@@ -55,8 +56,7 @@ if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password)
 	} else if ($passwords_do_not_match) {
 		$password_error = "The passwords must match";
 	} else if ($password_length_invalid) {
-		echo "</br>";
-		echo "</br>";
+		
 	  $password_error = "Password must be greater than 8 characters";
   	}else{
 		
