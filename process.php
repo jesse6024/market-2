@@ -12,8 +12,8 @@
   	$confirmPassword = $_POST['confirmPassword'];
     
 	// username and emial validation
-	$sql_u = "SELECT * FROM login WHERE username='$username'";
-  	$sql_e = "SELECT * FROM login WHERE password='$password'";
+	$sql_u = "SELECT * FROM register WHERE username='$username'";
+  	$sql_e = "SELECT * FROM register WHERE password='$password'";
   	$res_u = mysqli_query($db, $sql_u);
   	$res_e = mysqli_query($db, $sql_e);
 

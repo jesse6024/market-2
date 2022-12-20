@@ -1,6 +1,6 @@
 
 <?php
-include('proccess.php')
+include 'process.php';
 $server = "localhost";
 $user = "root";
 $pass = "";
@@ -9,7 +9,7 @@ $dbname = "market";
 //Creating connection for mysqli
  
 $conn = new mysqli($server, $user, $pass, $dbname);
- 
+include 'process.php';
 //Checking connection
  
 if($conn->connect_error){
@@ -18,10 +18,12 @@ if($conn->connect_error){
 if (isset($_POST['register'])) {
    $username = $_POST['username'];
    $password = $_POST['password'];
+   $email = $_POST['email'];
    $confirmPassword = $_POST['confirmPassword'];
    $pin = $_POST['pin'];
   $account_role= $_POST['account_role'];
 $username= mysqli_real_escape_string($conn, $_POST['username']);
+$email = mysqli_real_escape_string($conn, $_POST['email']);
 $password = mysqli_real_escape_string($conn, $_POST['password']);
 $confirmPassword = mysqli_real_escape_string($conn, $_POST['confirmPassword']);
 $pin = mysqli_real_escape_string($conn, $_POST['pin']);

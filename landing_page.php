@@ -13,16 +13,30 @@ include("auth.php");
 <link rel="stylesheet" href="password-strength-indicator.css">
 </head>
 <body>
-<div class="container" style="    position: absolute;
-    margin-top: -836px;
-    width: 100%;">
-        <h1>REUP MARKET</h1>
-
+<div class="container" style="        
+       position: absolute;
+    /* margin-top: -836px; */
+    /* width: 100%; *
+        margin-left: -31px;
+        
+">
+<h1>REUP MARKET</h1>
     </div>
-    <div class="container" style="margin-left: -30px;
-    margin-top: -193px;
-    height: 57%;
-    width: 102%;">
+    <div class="container" style="   
+    position: absolute;
+    /* margin-top: -836px; */
+    /* width: 100%; */
+    margin-left: -31px;
+    background: #fff;
+    padding: 20px 30px;
+    width: 420px;
+    top: 310px;
+    /* right: 6px; */
+    margin-left: 9px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgb(0 0 0 / 20%);
+    
+    ">
      
 
      <header></header>
@@ -57,9 +71,9 @@ if (ini_get("session.use_cookies")) {
 <p><a href="login.php">Logout</a></p>
 
 
-
-</div>
-</div>
 </form>
+</div>
+</div>
+
 </body>
 </html>
