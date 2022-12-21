@@ -1,55 +1,9 @@
 
 <?php
 include 'process.php';
-$server = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "market";
- 
-//Creating connection for mysqli
- 
-$conn = new mysqli($server, $user, $pass, $dbname);
-include 'process.php';
-//Checking connection
- 
-if($conn->connect_error){
- die("Connection failed:" . $conn->connect_error);
-}
-if (isset($_POST['register'])) {
-   $username = $_POST['username'];
-   $password = $_POST['password'];
-   $email = $_POST['email'];
-   $confirmPassword = $_POST['confirmPassword'];
-   $pin = $_POST['pin'];
-  $account_role= $_POST['account_role'];
-$username= mysqli_real_escape_string($conn, $_POST['username']);
-$email = mysqli_real_escape_string($conn, $_POST['email']);
-$password = mysqli_real_escape_string($conn, $_POST['password']);
-$confirmPassword = mysqli_real_escape_string($conn, $_POST['confirmPassword']);
-$pin = mysqli_real_escape_string($conn, $_POST['pin']);
-$account_role = mysqli_real_escape_string($conn, $_POST['account_role']);
-/*$age = mysqli_real_escape_string($conn, $_POST['age']);*/
- 
-date_default_timezone_set('Asia/Kolkata');
-	$timestamp = time();
-	$date_time = date("Y-m-d H:i:s");
-  $currentTime = $date_time;
 
-$sql = "INSERT INTO register (username,password,confirmPassword,pin,dateJoined,account_role) VALUES ('$username', '".md5($password)."','".md5($confirmPassword)."','$pin','$date_time','$account_role')";
 
-if($conn->query($sql) === TRUE){
- echo '<p>Record Added Sucessfully</p></br>';
- 
- echo $currentTime;
-  header("Location: login.php");
-}
-else
-{
- echo "Error" . $sql . "<br/>" . $conn->error;
-}
-
-$conn->close();
-} ?>
+?>
 
 <htmml>
         
@@ -94,59 +48,83 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
    padding-bottom: 382px;
 ">
          
-            <div class="field">
-                 
-                <input onkeyup="trigger()" type="password" name="password" required="" placeholder="Type password" id="password">
-               <span class="showBtn" style="    
-              top: 50%;
-              display: block;
-              right: 40px;
-              color: rgb(0, 0, 0);">SHOW</span>
-            </div>
-            <div class="indicator">
-               <span class="weak"></span>
-               <span class="medium"></span>
-               <span class="strong"></span>
-            </div>
-            <div class="text"></div>
-            
-            <input type="text" name="username" required value="" id="username" placeholder="Username" style="
-   
-    /* height: 100%; */
-    border: 1px solid lightgrey;
-    padding-left: 15px;
-    outline: none;
-    border-radius: 5px;
-    font-size: 15px;
-    transition: all 0.3s;
-    /* padding-top: 30px; */
-    margin-top: 30px;
-    ">
-    <div class="field">
-                 
-                 <input onkeyup="trigger()" type="password" name="confirmPassword" required="" placeholder="Confirm password" id="confirmPassword">
-                <span class="showBtn">SHOW</span>
-             </div>
-             <div class="indicator">
-                <span class="weak"></span>
-                <span class="medium"></span>
-                <span class="strong"></span>
-                
-             </div>
-             <div class="field">
-             <input type="text" name="pin" value="" placeholder="Pin" required="" style="
-    /* height: 100%; */
-    position:absolute;
-    margin-top:40px;
-    border: 1px solid lightgrey;
-    padding-left: 15px;
-    outline: none;
-    border-radius: 5px;
-    font-size: 15px;
-    transition: all 0.3s;
-    /* padding-top: 30px; */
-    ">
-    </div>
+<div class="">
+    <div <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
+      <input  style="width: 200px;
+    border-radius: 2px;
+    border: 1px solid #CCC;
+    padding: 10px;
+    color: #333;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;" type="text" name="username" placeholder="Username" id="Username" value="" >
+        <ul style="list-style-type: none; ">
+       <li>                      
+      <?php if (isset($name_error)): ?>
+      	<span class="error"><?php echo $name_error; ?></span>
+      <?php endif ?>
+      </li>
+      </ul>
+  	</div>
+    <div class="">
+
+
+    <div class="">
+    <div <?php if (isset($password_error)): ?> class="form_error" <?php endif ?> >
+      <input  style="width: 200px;
+    border-radius: 2px;
+    border: 1px solid #CCC;
+    padding: 10px;
+    color: #333;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;" type="password" name="userPassword" placeholder="Password" id="userPassword" value="" >
+         <ul style="list-style-type: none;  ">
+       <li>              
+      <?php if (isset($password_error)): ?>
+      	<span class="error"><?php echo $password_error; ?></span>
+      <?php endif ?>
+      </li>
+      </ul>
+  	</div>
+               
+    <div <?php if (isset($confirmPassword_error)): ?> class="form_error" <?php endif ?> >
+      <input  style="width: 200px;
+    border-radius: 2px;
+    border: 1px solid #CCC;
+    padding: 10px;
+    color: #333;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;" type="password" name="confirmPassword" placeholder="Confirm Password" id="password" value="" >
+         <ul style="list-style-type: none;  ">
+       <li>        
+      <?php if (isset($confirmPassword_error)): ?>
+      	<span class="error"><?php echo $confirmPassword_error; ?></span>
+      <?php endif ?>
+      </li>
+      </ul>
+  	</div>
+          
+    <div <?php if (isset($pin_error)): ?> class="form_error" <?php endif ?> >
+      <input  style="width: 200px;
+    border-radius: 2px;
+    border: 1px solid #CCC;
+    padding: 10px;
+    color: #333;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;" type="text" name="pin" placeholder="4 character pin" id="pin" value="" >
+      <ul style="list-style-type: none;  ">
+       <li> 
+      <?php if (isset($pin_error)): ?>
+      	 <span class="error"><?php echo $pin_error;?></span>
+      <?php endif ?>
+      </li>
+      </ul>
+  	</div>
+    
+    
     <script type="text/javascript">
     $('form').on('submit', function(e){
         e.preventDefault();
@@ -207,69 +185,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 </div>
              
       </form></div>
-      <script>
-         const indicator = document.querySelector(".indicator");
-         const input = document.querySelector("input");
-         const weak = document.querySelector(".weak");
-         const medium = document.querySelector(".medium");
-         const strong = document.querySelector(".strong");
-         const text = document.querySelector(".text");
-         const showBtn = document.querySelector(".showBtn");
-         let regExpWeak = /[a-z]/;
-         let regExpMedium = /\d+/;
-         let regExpStrong = /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
-         function trigger(){
-           if(input.value != ""){
-             indicator.style.display = "block";
-             indicator.style.display = "flex";
-             if(input.value.length <= 3 && (input.value.match(regExpWeak) || input.value.match(regExpMedium) || input.value.match(regExpStrong)))no=1;
-             if(input.value.length >= 6 && ((input.value.match(regExpWeak) && input.value.match(regExpMedium)) || (input.value.match(regExpMedium) && input.value.match(regExpStrong)) || (input.value.match(regExpWeak) && input.value.match(regExpStrong))))no=2;
-             if(input.value.length >= 6 && input.value.match(regExpWeak) && input.value.match(regExpMedium) && input.value.match(regExpStrong))no=3;
-             if(no==1){
-               weak.classList.add("active");
-               text.style.display = "block";
-               text.textContent = "Your password is too week";
-               text.classList.add("weak");
-             }
-             if(no==2){
-               medium.classList.add("active");
-               text.textContent = "Your password is medium";
-               text.classList.add("medium");
-             }else{
-               medium.classList.remove("active");
-               text.classList.remove("medium");
-             }
-             if(no==3){
-               weak.classList.add("active");
-               medium.classList.add("active");
-               strong.classList.add("active");
-               text.textContent = "Your password is strong";
-               text.classList.add("strong");
-             }else{
-               strong.classList.remove("active");
-               text.classList.remove("strong");
-             }
-             showBtn.style.display = "block";
-             showBtn.onclick = function(){
-               if(input.type == "password"){
-                 input.type = "text";
-                 showBtn.textContent = "HIDE";
-                 showBtn.style.color = "#23ad5c";
-               }else{
-                 input.type = "password";
-                 showBtn.textContent = "SHOW";
-                 showBtn.style.color = "#000";
-               }
-             }
-           }else{
-             indicator.style.display = "none";
-             text.style.display = "none";
-             showBtn.style.display = "none";
-           }
-         }
-       
       
-</script>
 </form>
 
 </body>

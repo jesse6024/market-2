@@ -6,24 +6,33 @@
   $confirmPassword ="";
 
   if (isset($_POST['register'])) {
-  	$username = $_POST['username'];
-  	$email = $_POST['email'];
-  	$password = $_POST['password'];
-  	$confirmPassword = $_POST['confirmPassword'];
+  	$username = $_POST["username"];
+  	//$email = $_POST['email'];
+  	$userPassword = $_POST["userPassword"];
+  	$confirmPassword = $_POST["confirmPassword"];
+	$account_role = $_POST["account_role"];
+	$pin = $_POST["pin"];
     
 	// username and emial validation
 	$sql_u = "SELECT * FROM register WHERE username='$username'";
-  	$sql_e = "SELECT * FROM register WHERE password='$password'";
+  	$sql_up = "SELECT * FROM register WHERE userPassword='$userPassword'";
+	$sql_cp = "SELECT * FROM register WHERE confirmPassword=$confirmPassword'";
+	$sql_e = "SELECT * FROM register WHERE email='$email'";
+	$sql_ar = "SELECT * FROM register WHERE acoount_role='$account_role'";
+	$sql_pin = "SELECT * FROM register WHERE pin='$pin'";
   	$res_u = mysqli_query($db, $sql_u);
-  	$res_e = mysqli_query($db, $sql_e);
-
-
+  	
+	$username= mysqli_real_escape_string($db, $_POST["username"]);
+    
+   
 	// password must be greater than 8 characters
-	$password_length_invalid = strlen($password) > 6;
+	$password_length_invalid = strlen($userPassword) < 6;
 
 	// password and confirm password do not match validation
-	$passwords_do_not_match = $password !== $confirmPassword;
+	$passwords_do_not_match = $userPassword !== $confirmPassword;
 	
+	$pinLengthInvalid = strlen($pin) < 4;
+	$pinLengthLong = strlen($pin) > 4;
 	// must contain a 1 special character
 	
 	// must contain at least 1 capital letter
@@ -34,37 +43,37 @@
 	$timestamp = time();
 	$date_time = date("Y-m-d H:i:s");
 	// Given password
-     $password = '';
-	 $confirmPasswprd = '';
+     $userPassword = "";
+	 $confirmPassword = "";
 
      // Validate password strength
-      $uppercase = preg_match('@[A-Z]@', $password);
-      $lowercase = preg_match('@[a-z]@', $password);
-      $number    = preg_match('@[0-9]@', $password);
-      $specialChars = preg_match('@[^\w]@', $password);
-
-if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 7) {
-    echo '<script>alert("Password must be a minimum of 8 characters and use one special character such as !")</script>';
-}else{
-    echo 'Strong password.';
-}
-	
+      $uppercase = preg_match('@[A-Z]@', $userPassword);
+      $lowercase = preg_match('@[a-z]@', $userPassword);
+      $number    = preg_match('@[0-9]@', $userPassword);
+      $specialChars = preg_match('@[^\w]@', $userPassword);
+      $needsUppercase = "";
+       
   	if (mysqli_num_rows($res_u) > 0) {
   	  $name_error = "Sorry... username already taken"; 	
-  	}else if(mysqli_num_rows($res_e) > 0){
-  	  $email_error = "Sorry... email already taken";
-	} else if ($passwords_do_not_match) {
-		$password_error = "The passwords must match";
+  	}else if ($passwords_do_not_match) {
+		$confirmPassword_error = "The passwords must match";
 	} else if ($password_length_invalid) {
 		
 	  $password_error = "Password must be greater than 8 characters";
-  	}else{
-		
-		$query = "INSERT INTO register (username, email, password, confirmPassword, pin, dateJoined,account_role) 
-      	    	  VALUES ('$username', $email ','$password','$confirmPassword','$pin','$account_role''$date_time')";
-           $results = mysqli_query($db, $query);
-		   header("Location:login.php");
-           exit();
+  	}else if ($pinLengthInvalid) {
+		$pin_error = "Pin must be a minimum of 6 characters";
+	} else if ($pinLengthLong) {
+		$pin_error = "Pin can't be more than 4 characters in length";
+	} 
+	
+	else{
+		$query = "INSERT INTO register (username, userPassword, confirmPassword, pin, account_role,dateJoined) 
+		VALUES ('$username', '".md5($userPassword)."','".md5($confirmPassword)."','$pin','$account_role', '$date_time')";
+        $results = mysqli_query($db, $query);
+        echo "Made an entry to database...";
+        exit();
+          
   	}
+   
   }
 ?>
