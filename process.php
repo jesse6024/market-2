@@ -51,8 +51,10 @@
       $lowercase = preg_match('@[a-z]@', $userPassword);
       $number    = preg_match('@[0-9]@', $userPassword);
       $specialChars = preg_match('@[^\w]@', $userPassword);
-      $needsUppercase = "";
-       
+      if (!$uppercase){
+		$password_error = "Password needs at least one uppercase character for validation";
+	  }
+     
   	if (mysqli_num_rows($res_u) > 0) {
   	  $name_error = "Sorry... username already taken"; 	
   	}else if ($passwords_do_not_match) {
@@ -62,7 +64,7 @@
 	  $password_error = "Password must be greater than 8 characters";
   	}else if ($pinLengthInvalid) {
 		$pin_error = "Pin must be a minimum of 6 characters";
-	} else if ($pinLengthLong) {
+	}else if ($pinLengthLong) {
 		$pin_error = "Pin can't be more than 4 characters in length";
 	} 
 	
