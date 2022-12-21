@@ -70,7 +70,7 @@
 		$query = "INSERT INTO register (username, userPassword, confirmPassword, pin, account_role,dateJoined) 
 		VALUES ('$username', '".md5($userPassword)."','".md5($confirmPassword)."','$pin','$account_role', '$date_time')";
         $results = mysqli_query($db, $query);
-        echo "Made an entry to database...";
+        header("Location: successful-registry.php");
         exit();
           
   	}
