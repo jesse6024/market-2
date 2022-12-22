@@ -32,7 +32,7 @@ include("auth.php");
     width: 420px;
     top: 310px;
     /* right: 6px; */
-    margin-left: 10px;
+    margin-left: 9px;
     border-radius: 5px;
     box-shadow: 0 0 15px rgb(0 0 0 / 20%);
     

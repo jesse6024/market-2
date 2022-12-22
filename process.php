@@ -51,22 +51,28 @@
       $lowercase = preg_match('@[a-z]@', $userPassword);
       $number    = preg_match('@[0-9]@', $userPassword);
       $specialChars = preg_match('@[^\w]@', $userPassword);
-      if (!$uppercase){
-		$password_error = "Password needs at least one uppercase character for validation";
-	  }
-     
+      $needsUppercase = "";
+       
   	if (mysqli_num_rows($res_u) > 0) {
+		
   	  $name_error = "Sorry... username already taken"; 	
   	}else if ($passwords_do_not_match) {
 		$confirmPassword_error = "The passwords must match";
 	} else if ($password_length_invalid) {
-		
-	  $password_error = "Password must be greater than 8 characters";
+		$password_error = "Password must be greater than 6 characters";
   	}else if ($pinLengthInvalid) {
 		$pin_error = "Pin must be a minimum of 6 characters";
-	}else if ($pinLengthLong) {
+	} else if ($pinLengthLong) {
 		$pin_error = "Pin can't be more than 4 characters in length";
-	} 
+	} else if($lowercase <=1){
+    
+		$confirmPassword_error = "lowercase character missing";
+
+	}else if($lowercase <=1){
+    
+		$confirmPassword_error = "uppercase character missing";
+
+	}
 	
 	else{
 		$query = "INSERT INTO register (username, userPassword, confirmPassword, pin, account_role,dateJoined) 
@@ -76,6 +82,14 @@
         exit();
           
   	}
+
+	  if (preg_match('/^[a-zA-Z]+[a-zA-Z0-9._]+$/', $password)) {
+		// Valid
+		$password_error = "Password is alphanumeric";
+	} else {
+		// Invalid
+		$confirmPassword_error = "Password isn't alphanumeric need 1 uppercase letter 1 lowercase letter 1 number and one special character such as @#$%*)";
+	}
    
   }
 ?>

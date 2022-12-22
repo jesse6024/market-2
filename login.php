@@ -24,7 +24,7 @@ if (isset($_POST['username'])){
 	$userPassword = stripslashes($_REQUEST['userPassword']);
 	$userPassword = mysqli_real_escape_string($con,$userPassword);
         //Checking is user existing in the database or not
-        $query = "SELECT * FROM `register` WHERE username='$username' AND userPassword='".md5($userPassword)."'";
+        $query = "SELECT * FROM `register` WHERE username='$username' AND userPassword='".md5($password)."'";
 	$result = mysqli_query($con,$query) or die(mysql_error());
 	$rows = mysqli_num_rows($result);
         if($rows==1){
@@ -34,10 +34,7 @@ if (isset($_POST['username'])){
 	    header("Location: landing_page.php");
          }else{
 	echo "
-    <div style=position:absolute>
-        <h1>REUP MARKET</h1>
-
-    <div class='container'>
+    <div class='container'
     <div class='form'>
 <h3>Username or password is incorrect.</h3>
 <br/>Click here to <a href='login.php'>Login</a></div></div>";
