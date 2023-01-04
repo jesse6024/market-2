@@ -10,7 +10,7 @@ switch($role && $username){
  header('location: vendor.php');
  break;
  case 'admin':
- header('location: admin.php');
+ header('location: admin-home.php');
  break;
  
 }
@@ -25,7 +25,7 @@ switch($role && $username){
 
 <head>
   <meta charset="utf-8">
-  <title>Vendor Homepage</title>
+  <title>Admin Homepage</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="password-strength-indicator.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">

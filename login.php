@@ -38,12 +38,11 @@ session_start();
 
                     $_SESSION['total_orders'] = $row['total_orders'];
                     $total_orders = $_SESSION['total_orders'];
-                    $account_role = $row['account_role'];
+                    $account_role = $_SESSION['account_role'];
 
-                   switch($account_role){
-                    case $account_role = "vendor":
+                    if($account_role == "vendor"){
                         header("Location: vendor.php");
-                   }
+                    }
                      
                     switch($total_orders) {
                         case $total_orders <= 300:
@@ -63,6 +62,7 @@ session_start();
                             break;
                     }
                 
+                    
                     $_SESSION['trust_level'] = $trust_level;
                 }
                 
@@ -89,11 +89,8 @@ if(!empty($_POST['submit'])){
     //$userPassword = stripslashes($_REQUEST['userPassword']);
     
     $query = "SELECT * FROM register WHERE username='$username' AND userPassword='$userPassword'";
-
     $result= mysqli_query($con, $query);
-
     $count = mysqli_num_rows($result);
-
     if($count > 0)
     {
         echo "Login Successful";

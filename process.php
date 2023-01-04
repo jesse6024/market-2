@@ -80,7 +80,7 @@ if (isset($_POST['register'])) {
 	     
 		$password_error = "Valid Password Entry Inserted Into Database Successfully!";
 		$query = "INSERT INTO register (username, userPassword, confirmPassword, pin, account_role,dateJoined) 
-		VALUES ('$username', '" . md5($userPassword) . "','" . md5($confirmPassword) . "','$pin','$account_role', '$date_time')";
+		VALUES ('$username', '$hash','$chash','$pin','$account_role', '$date_time')";
 		$results = mysqli_query($db, $query);
 		header("Location: login.php");
 		}
