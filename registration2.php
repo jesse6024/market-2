@@ -133,8 +133,8 @@
 <div class="custom-select" style="width:200px;">
   <select id="account_role" name="account_role" style="
     position:absolute;
-    //width: 10%;
-    //margin-left:-102px;
+    width: 10%;
+    margin-left:-102px;
     border: 1px solid lightgrey;
     padding-left: 15px;
     outline: none;
@@ -188,7 +188,7 @@
     border: 1px solid #0164a5;
     border-radius: 2px;
     margin-top: 165px;
-    //margin-left: 140;
+    margin-left: 140;
     cursor: pointer;
     display: inline-block;
     position: absolute;

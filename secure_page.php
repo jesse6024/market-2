@@ -68,7 +68,7 @@ if (ini_get("session.use_cookies")) {
 
 */
 ?>
-<p><a href="logout.php">Logout</a></p>
+<p><a href="login.php">Logout</a></p>
 
 
 </form>
